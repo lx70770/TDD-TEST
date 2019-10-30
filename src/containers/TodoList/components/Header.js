@@ -20,13 +20,18 @@ class Header extends React.PureComponent {
   render() {
     const { value } = this.state;
     return (
-      <div>
-        <input
-          onChange={this.handleInputChange}
-          onKeyUp={this.handleKeyUp}
-          data-test="input"
-          value={value}
-        />
+      <div className="Header">
+        <div className="Header-content">
+          TodoList
+          <input
+            className="Header-input"
+            placeholder="todo"
+            onChange={this.handleInputChange}
+            onKeyUp={this.handleKeyUp}
+            data-test="input"
+            value={value}
+          />
+        </div>
       </div>
     );
   }
