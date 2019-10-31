@@ -9,7 +9,10 @@ module.exports = {
   setupFiles: ["react-app-polyfill/jsdom"],
 
   // 做一些额外的文件配置
-  setupFilesAfterEnv: ["./node_modules/jest-enzyme/lib/index.js"],
+  setupFilesAfterEnv: [
+    "./node_modules/jest-enzyme/lib/index.js",
+    "<rootDir>/src/utils/testSetup.js"
+  ],
 
   // 定义测试文件夹和文件
   testMatch: [

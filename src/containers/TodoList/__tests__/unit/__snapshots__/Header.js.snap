@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header渲染正常 1`] = `
+exports[`Header组件 渲染正常 1`] = `
 <div
   className="Header"
 >
