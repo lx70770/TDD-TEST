@@ -20,21 +20,48 @@ it("回车时，undolist新增内容", () => {
   const userInput = "JEST";
   addFunc(userInput);
   expect(wrapper.state("undoList").length).toBe(1);
-  expect(wrapper.state("undoList")[0]).toBe(userInput);
+  expect(wrapper.state("undoList")[0]).toEqual({
+    status: "div",
+    value: userInput
+  });
 });
 
-it("TodoList 应该给未完成列表传递 list 数据， 以及 deleteItem 方法", () => {
+it("TodoList 应该给未完成列表传递 list 数据， 以及 deleteItem、changeStatus 方法", () => {
   const wrapper = shallow(<TodoList />);
   const UndoList = wrapper.find("UndoList");
   expect(UndoList.prop("list")).toBeTruthy();
   expect(UndoList.prop("deleteItem")).toBeTruthy();
+  expect(UndoList.prop("changeStatus")).toBeTruthy();
 });
 
 it("deleteItem执行时，undolist删除内容", () => {
   const wrapper = shallow(<TodoList />);
   wrapper.setState({
-    undoList: ["111", "222", "333"]
+    undoList: [
+      { status: "div", value: "1111" },
+      { status: "div", value: "2222" },
+      { status: "div", value: "3333" }
+    ]
   });
   wrapper.instance().deleteItem(1);
-  expect(wrapper.state("undoList")).toEqual(["111", "333"]);
+  expect(wrapper.state("undoList")).toEqual([
+    { status: "div", value: "1111" },
+    { status: "div", value: "3333" }
+  ]);
+});
+
+it("changeStatus执行时，undolist中某项数据的status变为input", () => {
+  const wrapper = shallow(<TodoList />);
+  wrapper.setState({
+    undoList: [
+      { status: "div", value: "1111" },
+      { status: "div", value: "2222" },
+      { status: "div", value: "3333" }
+    ]
+  });
+  wrapper.instance().changeStatus(1);
+  expect(wrapper.state("undoList")[1]).toEqual({
+    status: "input",
+    value: "2222"
+  });
 });

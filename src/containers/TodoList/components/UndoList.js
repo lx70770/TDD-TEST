@@ -2,7 +2,7 @@ import React from "react";
 
 class UndoList extends React.PureComponent {
   render() {
-    const { list, deleteItem } = this.props;
+    const { list, deleteItem, changeStatus, handleBlur } = this.props;
     return (
       <div className="undo-list">
         <div className="undo-list-title">
@@ -16,10 +16,19 @@ class UndoList extends React.PureComponent {
             return (
               <li
                 data-test="list-item"
-                key={`${item}-${index}`}
+                key={index}
+                onClick={() => changeStatus(index)}
                 className="undo-list-item"
               >
-                {item}
+                {item.status === "div" ? (
+                  item.value
+                ) : (
+                  <input
+                    onBlur={() => handleBlur(index)}
+                    value={item.value}
+                    data-test="input"
+                  />
+                )}
                 <span
                   data-test="delete-item"
                   onClick={() => deleteItem(index)}
